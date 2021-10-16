@@ -1,0 +1,606 @@
+Underdog Temp. intro 90%
+
+[SceneDef]
+spr = intro.sff
+startscene = 0         ;Starting scene number (for debugging)
+
+;------------------------------------
+[Scene 0]
+; Fade
+fadein.time = 20      ;Time to take for fading in
+fadein.col = 0,0,0     ;Use 255,255,255 for white-fade
+fadeout.time = 40
+fadeout.col = 0,0,0
+; Screen color
+clearcolor = 0,0,0
+; Overlay Anims (from 0 to 9)
+layerall.pos = 160,0   ;Default position for all layers
+layer0.anim =  5 ;Anim action number
+layer0.offset = 0,0   ;Position offset
+layer0.starttime = 110   ;Time to start display
+layer1.anim =  2
+layer1.offset = 0,0   ;Position offset
+layer1.starttime = 0
+layer2.anim =  4
+layer2.offset = 0,0   ;Position offset
+layer2.starttime = 110
+end.time = 140
+bgm = logo1.mp3;DDRIntro.mid
+;bgm.loop = 0
+
+;------------------------------------
+[Scene 1]
+; Fade
+fadein.time = 50      ;Time to take for fading in
+fadein.col = 0,0,0     ;Use 255,255,255 for white-fade
+fadeout.time = 40
+fadeout.col = 0,0,0
+; Screen color
+clearcolor = 0,0,0
+; Overlay Anims (from 0 to 9)
+layerall.pos = 160,0   ;Default position for all layers
+layer0.anim =  1       ;Anim action number
+layer0.offset = 0,0   ;Position offset
+layer0.starttime = 0   ;Time to start display
+;bgm = underdogg.mp3;DDRIntro.mid
+;bgm.loop = 0
+end.time = 250
+
+;------------------------------------
+[Scene 2]
+; Fade
+fadein.time = 20      ;Time to take for fading in
+fadein.col = 0,0,0     ;Use 255,255,255 for white-fade
+fadeout.time = 40
+fadeout.col = 0,0,0
+; Screen color
+clearcolor = 0,0,0
+; Overlay Anims (from 0 to 9)
+layerall.pos = 160,0   ;Default position for all layers
+layer0.anim =  6 ;Anim action number
+layer0.offset = 0,0   ;Position offset
+layer0.starttime = 0   ;Time to start display
+layer1.anim =  7
+layer1.offset = 0,0   ;Position offset
+layer1.starttime = 0
+layer2.anim =  8
+layer2.offset = 0,0   ;Position offset
+layer2.starttime = 5
+end.time = 260
+bgm = DDRYOU.mid;DDRIntro.mid
+;bgm.loop = 0
+
+;------------------------------------
+[Scene 3]
+; Fade
+fadein.time = 20      ;Time to take for fading in
+fadein.col = 0,0,0     ;Use 255,255,255 for white-fade
+fadeout.time = 40
+fadeout.col = 0,0,0
+; Screen color
+clearcolor = 205,194,12
+; Overlay Anims (from 0 to 9)
+layerall.pos = 160,0   ;Default position for all layers
+;layer0.anim =  6 ;Anim action number
+;layer0.offset = 0,0   ;Position offset
+;layer0.starttime = 0   ;Time to start display
+layer1.anim =  9
+layer1.offset = 0,0   ;Position offset
+layer1.starttime = 0
+layer2.anim =  10
+layer2.offset = 0,0   ;Position offset
+layer2.starttime = 5
+end.time = 240
+;bgm = logo1.mp3;DDRIntro.mid
+;bgm.loop = 0
+
+;------------------------------------
+;Shoe
+[Scene 4]
+; Fade
+fadein.time = 20      ;Time to take for fading in
+fadein.col = 0,0,0     ;Use 255,255,255 for white-fade
+fadeout.time = 40
+fadeout.col = 0,0,0
+; Screen color
+clearcolor = 0,0,0
+; Overlay Anims (from 0 to 9)
+layerall.pos = 160,0   ;Default position for all layers
+;layer0.anim =  11 ;Anim action number
+;layer0.offset = 0,0   ;Position offset
+;layer0.starttime = 0   ;Time to start display
+layer1.anim =  11
+layer1.offset = 0,0   ;Position offset
+layer1.starttime = 0
+;layer2.anim =  10
+;layer2.offset = 0,0   ;Position offset
+;layer2.starttime = 5
+end.time = 240
+;bgm = logo1.mp3;DDRIntro.mid
+;bgm.loop = 0
+
+;------------------------------------
+;Thanks
+[Scene 5]
+; Fade
+fadein.time = 20      ;Time to take for fading in
+fadein.col = 0,0,0     ;Use 255,255,255 for white-fade
+fadeout.time = 40
+fadeout.col = 0,0,0
+; Screen color
+clearcolor = 0,0,0
+; Overlay Anims (from 0 to 9)
+layerall.pos = 160,0   ;Default position for all layers
+layer0.anim =  12 ;Anim action number
+layer0.offset = 0,0   ;Position offset
+layer0.starttime = 0   ;Time to start display
+layer1.anim =  13
+layer1.offset = 0,0   ;Position offset
+layer1.starttime = 0
+layer2.anim =  14
+layer2.offset = 0,0   ;Position offset
+layer2.starttime = 5
+end.time = 240
+;bgm = logo1.mp3;DDRIntro.mid
+;bgm.loop = 0
+
+;------------------------------------
+;Thanks
+[Scene 5]
+; Fade
+fadein.time = 20      ;Time to take for fading in
+fadein.col = 0,0,0     ;Use 255,255,255 for white-fade
+fadeout.time = 40
+fadeout.col = 0,0,0
+; Screen color
+clearcolor = 0,0,0
+; Overlay Anims (from 0 to 9)
+layerall.pos = 160,0   ;Default position for all layers
+layer0.anim =  12 ;Anim action number
+layer0.offset = 0,0   ;Position offset
+layer0.starttime = 0   ;Time to start display
+layer1.anim =  15
+layer1.offset = 0,0   ;Position offset
+layer1.starttime = 0
+layer2.anim =  16
+layer2.offset = 0,0   ;Position offset
+layer2.starttime = 5
+end.time = 260
+;bgm = logo1.mp3;DDRIntro.mid
+;bgm.loop = 0
+
+;------------------------------------
+;Thanks
+[Scene 5]
+; Fade
+fadein.time = 20      ;Time to take for fading in
+fadein.col = 0,0,0     ;Use 255,255,255 for white-fade
+fadeout.time = 40
+fadeout.col = 0,0,0
+; Screen color
+clearcolor = 0,0,0
+; Overlay Anims (from 0 to 9)
+layerall.pos = 160,0   ;Default position for all layers
+;layer0.anim =  12 ;Anim action number
+;layer0.offset = 0,0   ;Position offset
+;layer0.starttime = 0   ;Time to start display
+layer1.anim =  17
+layer1.offset = 0,0   ;Position offset
+layer1.starttime = 0
+;layer2.anim =  16
+;layer2.offset = 0,0   ;Position offset
+;layer2.starttime = 5
+end.time = 340
+;bgm = logo1.mp3;DDRIntro.mid
+;bgm.loop = 0
+
+;------------------------------------
+;Thanks
+[Scene 6]
+; Fade
+fadein.time = 20      ;Time to take for fading in
+fadein.col = 0,0,0     ;Use 255,255,255 for white-fade
+fadeout.time = 40
+fadeout.col = 0,0,0
+; Screen color
+clearcolor = 0,0,0
+; Overlay Anims (from 0 to 9)
+layerall.pos = 160,0   ;Default position for all layers
+layer0.anim =  12 ;Anim action number
+layer0.offset = 0,0   ;Position offset
+layer0.starttime = 0   ;Time to start display
+layer1.anim =  18
+layer1.offset = 0,0   ;Position offset
+layer1.starttime = 0
+layer2.anim =  19
+layer2.offset = 0,0   ;Position offset
+layer2.starttime = 5
+end.time = 260
+;bgm = logo1.mp3;DDRIntro.mid
+;bgm.loop = 0
+
+;------------------------------------
+;Thanks
+[Scene 7]
+; Fade
+fadein.time = 20      ;Time to take for fading in
+fadein.col = 0,0,0     ;Use 255,255,255 for white-fade
+fadeout.time = 40
+fadeout.col = 0,0,0
+; Screen color
+clearcolor = 0,0,0
+; Overlay Anims (from 0 to 9)
+layerall.pos = 160,0   ;Default position for all layers
+layer0.anim =  12 ;Anim action number
+layer0.offset = 0,0   ;Position offset
+layer0.starttime = 0   ;Time to start display
+layer1.anim =  20
+layer1.offset = 0,0   ;Position offset
+layer1.starttime = 0
+layer2.anim =  21
+layer2.offset = 0,0   ;Position offset
+layer2.starttime = 5
+end.time = 260
+;bgm = logo1.mp3;DDRIntro.mid
+;bgm.loop = 0
+
+[Begin Action 0]
+0,11, 0,0, 90
+
+;Underdog
+[Begin Action 1]
+0,12, 0,0, 90
+
+[Begin Action 2]
+0,1, 0,0, 15
+0,2, 0,0, 5
+0,3, 0,0, 5
+0,4, 0,0, 5
+0,5, 0,0, 5
+0,6, 0,0, 5
+0,7, 0,0, 2
+;0,8, 0,0, 2
+;0,9, 0,0, 2
+;0,10, 0,0, 2
+0,0, 0,0, -1
+0,0, 0,20, 1
+0,0, 0,-15, 1
+0,0, 0,11, 1
+0,0, 0,-8, 1
+0,0, 0,6, 1
+0,0, 0,-4, 1
+0,0, 0,2, 1
+0,0, 0,-1, 1
+0,0, 0,0, -1
+
+;Underdog
+[Begin Action 3]
+0,13, 0,0, 90
+
+;Underdog
+[Begin Action 4]
+0,14, 0,0, 90
+
+;Underdog
+[Begin Action 5]
+0,15, 0,0, 90
+
+;Bcakground1
+[Begin Action 6]
+0,28, 0,0, 900
+
+;Shoe-Shine
+[Begin Action 7]
+0,16, 0,0, 5
+0,17, 0,0, 5
+0,18, 0,0, 5
+0,17, 0,0, 5
+0,16, 0,0, 5
+0,17, 0,0, 5
+0,18, 0,0, 5
+0,17, 0,0, 5
+0,16, 0,0, 5
+0,17, 0,0, 5
+0,18, 0,0, 5
+0,17, 0,0, 5
+0,16, 0,0, 5
+0,17, 0,0, 5
+0,18, 0,0, 5
+0,17, 0,0, 5
+0,16, 0,0, 5
+0,17, 0,0, 5
+0,18, 0,0, 5
+0,17, 0,0, 5
+0,16, 0,0, 5
+0,17, 0,0, 5
+0,18, 0,0, 5
+0,17, 0,0, 5
+0,16, 0,0, 5
+0,17, 0,0, 5
+0,18, 0,0, 5
+0,17, 0,0, 5
+
+;Greatful Customer
+[Begin Action 8]
+0,31, 0,0, 55
+
+;Shoe
+[Begin Action 9]
+0,19, 0,0, 10
+0,20, 0,0, 4
+0,19, 0,0, 3
+0,21, 0,0, 4
+0,19, 0,0, 3
+0,22, 0,0, 4
+
+;Finished!
+[Begin Action 10]
+0,30, 0,0, 55
+
+;Coin
+[Begin Action 11]
+0,23, 0,0, 55
+
+;Wall
+[Begin Action 12]
+0,35, 0,0, 55
+
+;Thanks
+[Begin Action 13]
+0,24, 0,0, 55
+
+;Thanks
+[Begin Action 14]
+0,36, 0,0, 55
+
+;Thanks
+[Begin Action 15]
+0,25, 0,0, 55
+
+;Thanks
+[Begin Action 16]
+0,29, 0,0, 55
+
+;Thanks
+[Begin Action 17]
+0,32, 0,0, 55
+
+;Mad
+[Begin Action 18]
+0,37, 0,0, 55
+
+;Save
+[Begin Action 19]
+0,33, 0,0, 55
+
+;Undedog
+[Begin Action 20]
+0,26, 0,0, 137
+0,27, 0,20, 4
+0,27, 0,-15, 4
+0,27, 0,11, 4
+0,27, 0,-8, 4
+0,27, 0,6, 4
+0,27, 0,-4, 4
+0,27, 0,2, 4
+0,27, 0,-1, 4
+0,27, 0,0, -1
+
+;Undrdog
+[Begin Action 21]
+0,34, 0,0, 55
+
+;Undedog
+[Begin Action 22]
+0,39, 0,0, 3
+0,60, 0,0, 3
+0,61, 0,0, 3
+0,62, 0,0, 3
+
+;Undrdog
+[Begin Action 23]
+0,44, 0,0, 3,,A
+0,45, 0,0, 3,,A
+0,46, 0,0, 3,,A
+0,47, 0,0, 3,,A
+0,48, 0,0, 3,,A
+0,49, 0,0, 3,,A
+0,50, 0,0, 3,,A
+0,51, 0,0, 3,,A
+0,52, 0,0, 3,,A
+0,53, 0,0, 3,,A
+
+;Set Free
+[Begin Action 24]
+0,54, 0,0, 210
+0,55, 0,0, 210
+0,56, 0,0, 210
+
+;Polly
+[Begin Action 25]
+0,78, 0,0, 5,,A155;57
+0,79, 0,0, 5,,A155
+0,80, 0,0, 5,,A155
+0,81, 0,0, 5,,A155
+0,80, 0,0, 5,,A155;57
+0,79, 0,0, 5,,A155
+0,78, 0,0, 5,,A155
+0,79, 0,0, 5,,A155
+0,80, 0,0, 5,,A155
+0,81, 0,0, 5,,A155
+0,80, 0,0, 5,,A155;57
+0,79, 0,0, 5,,A155
+0,78, 0,0, 5,,A155
+0,78, 0,0, 5,,A155;57
+0,79, 0,0, 5,,A155
+0,80, 0,0, 5,,A155
+0,81, 0,0, 5,,A155
+0,80, 0,0, 5,,A155;57
+0,79, 0,0, 5,,A155
+0,78, 0,0, 5,,A155
+0,79, 0,0, 5,,A155
+0,80, 0,0, 5,,A155
+0,81, 0,0, 5,,A155
+0,80, 0,0, 5,,A155;57
+0,79, 0,0, 5,,A155
+0,78, 0,0, 5,,A155
+0,78, 0,0, 5,,A155;57
+0,79, 0,0, 5,,A155
+0,80, 0,0, 5,,A155
+0,81, 0,0, 5,,A155
+0,80, 0,0, 5,,A155;57
+0,79, 0,0, 5,,A155
+0,78, 0,0, 5,,A155
+0,79, 0,0, 5,,A155
+0,80, 0,0, 5,,A155
+0,81, 0,0, 5,,A155
+0,80, 0,0, 5,,A155;57
+0,79, 0,0, 5,,A155
+0,78, 0,0, 5,,A155
+0,78, 0,0, 5,,A155;57
+0,79, 0,0, 5,,A155
+0,80, 0,0, 5,,A155
+0,81, 0,0, 5,,A155
+0,80, 0,0, 5,,A155;57
+0,79, 0,0, 5,,A155
+0,78, 0,0, 5,,A155
+0,79, 0,0, 5,,A155
+0,80, 0,0, 5,,A155
+0,81, 0,0, 5,,A155
+0,80, 0,0, 5,,A155;57
+0,79, 0,0, 5,,A155
+0,78, 0,0, 5,,A155
+0,78, 0,0, 5,,A155;57
+0,79, 0,0, 5,,A155
+0,80, 0,0, 5,,A155
+0,81, 0,0, 5,,A155
+0,80, 0,0, 5,,A155;57
+0,79, 0,0, 5,,A155
+0,78, 0,0, 5,,A155
+0,79, 0,0, 5,,A155
+0,80, 0,0, 5,,A155
+0,81, 0,0, 5,,A155
+0,80, 0,0, 5,,A155;57
+0,79, 0,0, 5,,A155
+0,78, 0,0, 5,,A155
+0,78, 0,0, 5,,A155;57
+0,79, 0,0, 5,,A155
+0,80, 0,0, 5,,A155
+0,81, 0,0, 5,,A155
+0,80, 0,0, 5,,A155;57
+0,79, 0,0, 5,,A155
+0,78, 0,0, 5,,A155
+0,79, 0,0, 5,,A155
+0,80, 0,0, 5,,A155
+0,81, 0,0, 5,,A155
+0,80, 0,0, 5,,A155;57
+0,79, 0,0, 5,,A155
+0,78, 0,0, 5,,A155
+
+
+9999,57, 0,0, -1
+
+;Polly?
+[Begin Action 26]
+0,58, 0,0, 210
+0,59, 0,0, 210
+0,58, 0,0, -1
+
+;Villians
+[Begin Action 27]
+0,38, 0,0, 210
+
+;Villians
+[Begin Action 28]
+0,41, 0,0, 270
+0,42, 0,0, 270
+0,43, 0,0, -1
+
+;Undedog
+[Begin Action 40]
+0,63, 0,0, 5
+0,64, 0,-1, 5
+0,65, 0,-2, 5
+0,66, 0,-3, 5
+0,63, 0,-4, 5
+0,64, 0,-5, 5
+0,65, 0,-6, 5
+0,66, 0,-7, 5
+0,63, 0,-6, 5
+0,64, 0,-5, 5
+0,65, 0,-4, 5
+0,66, 0,-3, 5
+0,63, 0,-2, 5
+0,64, 0,-1, 5
+0,65, 0,-0, 5
+0,66, 0,0, 5
+
+;Clouds
+[Begin Action 41]
+0,67, 0,0, 4,,A155
+
+;Electro1
+[Begin Action 42]
+0,70, 0,5, 3,,A155
+9999,72, 0,0, 80
+0,72, 0,5, 3,,A155
+0,70, 0,5, 3,,A155
+9999,72, 0,0, 80
+0,72, 0,5, 3,,A155
+0,70, 0,5, 3,,A155
+9999,72, 0,0, 80
+0,72, 0,5, 3,,A155
+9999,72, 0,0, -1
+
+;Electro2
+[Begin Action 43]
+0,73, 0,5, 7,,A155
+9999,72, 0,0, 80
+0,74, 0,5, 7,,A155
+ 9999,72, 0,0, 125
+0,73, 0,5, 7,,A155
+9999,72, 0,0, 90
+0,74, 0,5, 7,,A155
+0,73, 0,5, 7,,A155
+9999,72, 0,0, 80
+0,74, 0,5, 7,,A155
+ 9999,72, 0,0, 125
+0,73, 0,5, 7,,A155
+0,74, 0,5, 7,,A155
+9999,72, 0,0, -1
+
+;Electro2
+[Begin Action 44]
+0,75, 0,5, 3,,A155
+9999,72, 0,0, 80
+0,76, 0,5, 3,,A155
+ 9999,72, 0,0, 125
+0,77, 0,5, 3,,A155
+9999,72, 0,0, 30
+0,76, 0,5, 3,,A155
+
+;Undedog
+[Begin Action 45]
+0,68, 0,0, 3
+0,69, 0,0, 3
+
+;Grrrrr!
+[Begin Action 46]
+0,75, 0,0, 220
+
+;Mayhem
+[Begin Action 47]
+0,76, 0,0, 220
+
+
+
+
+
+
+
+
+
+
+
+
+

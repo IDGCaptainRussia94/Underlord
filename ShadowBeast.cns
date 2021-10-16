@@ -1,0 +1,1277 @@
+;---------------------------------------------------------------------------
+; Beast
+; CNS difficulty: easy
+[Statedef 2500]
+type    = C                      ;State-type: S-stand, C-crouch, A-air, L-liedown
+movetype= I                      ;Move-type: A-attack, I-idle, H-gethit
+physics = N                      ;Physics: S-stand, C-crouch, A-air
+juggle  = 4                      ;Number of air juggle points move takes
+;Commonly-used controllers:                    
+ctrl = 0                         ;Set ctrl (Def: no change)
+poweradd = 0                    ;Power to add (Def: 0)
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = root,win && roundstate = 4
+value = 25000
+ctrl = 0
+
+[State 0, Null]
+type = Null
+trigger1 = root,fvar(30)<999
+trigger1 = root,cond(1,fvar(30) := 1000,0)
+;ignorehitpause = 
+;persistent = 
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = var(10)<1000 
+v = 10    ;fv = 10
+value = 10020
+
+[State 0, VarAdd]
+type = VarAdd
+trigger1 = var(10)>10020
+v = 10    ;fv = 
+value = -2
+
+[State 0, VarAdd]
+type = VarAdd
+trigger1 = var(10)<=10020
+v = 10    ;fv = 
+value = 2
+
+[State 0, SprPriority]
+type = SprPriority
+trigger1 = anim != 10099
+value = 2
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = anim != 10099
+value = 10099
+elem = 1
+
+[State 0, PosSet]
+type = PosAdd
+trigger1 = 1
+x = ((root,pos x-(facing*24))-pos x)/(3.00)*facing
+y = ((root,pos y-8)-pos y)/(3.00)
+
+[State 0, ReversalDef]
+type = ReversalDef
+trigger1 = 1
+reversal.attr = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+pausetime = 0,26
+;sparkxy = 0,0 ;offset
+;hitsound = S1,0
+pausetime = 0,30
+p1stateno = 2502
+id = 2500
+;p2stateno = 2502
+
+[State 0, VelMul]
+type = VelMul
+trigger1 = 1
+x = 0.8
+y = 0.9
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = root,stateno = [119,131]
+value = 2508
+ctrl = 0
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = root,movetype != I
+value = 2501
+ctrl = 0
+
+[State 0, Trans]
+type = Trans
+trigger1 = 1
+trans = addalpha
+alpha = floor(256*((var(10)-10000)/100.00)),256-floor(256*((var(10)-10000)/100.00))
+
+[State 0, Turn]
+type = Turn
+trigger1 = root,facing != facing
+
+;---------------------------------------------------------------------------
+; Beast Win
+; CNS difficulty: easy
+[Statedef 25000]
+type    = C                      ;State-type: S-stand, C-crouch, A-air, L-liedown
+movetype= I                      ;Move-type: A-attack, I-idle, H-gethit
+physics = N                      ;Physics: S-stand, C-crouch, A-air
+juggle  = 4                      ;Number of air juggle points move takes
+;Commonly-used controllers:                    
+ctrl = 0                         ;Set ctrl (Def: no change)
+poweradd = 0                    ;Power to add (Def: 0)
+
+[State 0, SprPriority]
+type = SprPriority
+trigger1 = 1
+value = -20
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time=16
+value = S5,29
+supermovetime = 99999
+pausemovetime = 99999
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = time=16
+value = S5,31
+supermovetime = 99999
+pausemovetime = 99999
+
+[State 0, EnvShake]
+type = EnvShake
+trigger1 = time=16
+time = 32
+freq = 180
+ampl = -16
+phase = 90
+
+[State 0, EnvShake]
+type = EnvShake
+trigger1 = time=48
+time = 32
+freq = 180
+ampl = -8
+phase = 90
+
+[State 0, Explod]
+type = Explod
+trigger1 = time>15 && time%2=0
+anim = 7100
+pos = 0,8
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+removetime = -2
+pausemovetime = 0
+vel = 0,-3.00-((random%1000)/500.00)
+random = 96,16
+scale = 0.15,0.15
+sprpriority = -20+random%10
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 0
+trans = sub
+supermovetime = 99999
+pausemovetime = 99999
+angle = random%360
+
+[State 0, Glowing Sparkles shadowbeast mode]
+type = Explod
+trigger1 = time>15 && time<30
+anim = 7101
+pos = 0,-pos y
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = (vel x/(1.00+abs(vel x/3.00))/1.00) +((750.00-Random%2000)/1000.00)*-1.00,((200.00-Random%1500)/1000.00)*0.25
+accel = 0,0
+random = 42,8
+removetime = -2
+scale = 0.50+(time-15)*0.07,0.30
+sprpriority = 20-random%26
+ownpal = 1
+trans = sub
+angle = random%360
+xangle = 80
+supermovetime = 99999999
+
+[State 0, VarAdd]
+type = VarAdd
+trigger1 = var(10)<10100
+v = 10    ;fv = 
+value = 10
+ignorehitpause = 1
+
+[State 0, PosSet]
+type = PosAdd
+trigger1 = 1
+x = ((root,pos x-(facing*0))-pos x)/(1.00)*facing
+y = ((root,pos y)-pos y)/(3.00)
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = time=0
+value = 10024
+elem = 1
+
+[State 0, Trans]
+type = Trans
+trigger1 = 1
+trans = addalpha
+alpha = floor(256*((var(10)-10000)/100.00)),256-floor(256*((var(10)-10000)/100.00))
+
+[State 0, Turn]
+type = Turn
+trigger1 = root,facing != facing
+
+;---------------------------------------------------------------------------
+; Beast waiting
+; CNS difficulty: easy
+[Statedef 2501]
+type    = C                      ;State-type: S-stand, C-crouch, A-air, L-liedown
+movetype= I                      ;Move-type: A-attack, I-idle, H-gethit
+physics = N                      ;Physics: S-stand, C-crouch, A-air
+juggle  = 4                      ;Number of air juggle points move takes
+;Commonly-used controllers:                    
+ctrl = 0                         ;Set ctrl (Def: no change)
+poweradd = 0                    ;Power to add (Def: 0)
+sprpriority = 2                  ;Set layering priority to 2 (in front)
+
+[State 0, Trans]
+type = Trans
+trigger1 = 1
+trans = addalpha
+alpha = floor(256*((var(10)-10000)/100.00)),256-floor(256*((var(10)-10000)/100.00))
+
+[State 0, PosSet]
+type = PosAdd
+trigger1 = 1
+x = (root,pos x-pos x)/(16.00)*facing
+y = (root,pos y-pos y)/(16.00)
+
+[State 0, VarAdd]
+type = VarAdd
+trigger1 = var(10)>10000
+v = 10    ;fv = 
+value = -5
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = (root,movetype = H || root,stateno = [120,130]) && root,stateno = [100,200]
+trigger2 = var(12)>0
+value = 2508
+ctrl = 0
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = root,stateno = 1210
+value = 2503
+ctrl = 0
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = root,movetype = I
+value = 2500
+ctrl = 0
+
+;---------------------------------------------------------------------------
+; Beast counter
+; CNS difficulty: easy
+[Statedef 2502]
+type    = C                      ;State-type: S-stand, C-crouch, A-air, L-liedown
+movetype= A                      ;Move-type: A-attack, I-idle, H-gethit
+physics = N                      ;Physics: S-stand, C-crouch, A-air
+juggle  = 4                      ;Number of air juggle points move takes
+;Commonly-used controllers:                    
+ctrl = 0                         ;Set ctrl (Def: no change)
+poweradd = 50                    ;Power to add (Def: 0)
+sprpriority = 2                  ;Set layering priority to 2 (in front)
+anim = 10200
+
+[State 0, Trans]
+type = Trans
+trigger1 = 1
+trans = addalpha
+alpha = floor(256*((var(10)-10000)/100.00)),256-floor(256*((var(10)-10000)/100.00))
+
+[State 0, VarAdd]
+type = VarAdd
+trigger1 = var(10)<10100
+v = 10    ;fv = 
+value = 10
+ignorehitpause = 1
+
+[State 0, SprPriority]
+type = SprPriority
+trigger1 = time=0
+value = 25
+
+[State 0, Glowing Sparkles shadowbeast mode]
+type = Explod
+trigger1 = time>2 && time<9
+anim = 7101
+pos = 80,-72
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 3,0
+accel = 0,0
+random = 8,12
+removetime = -2
+scale = 0.55,0.55
+sprpriority = 60
+ownpal = 1
+trans = sub
+angle = random%360
+xangle = 80
+supermovetime = 99999999
+ignorehitpause = 1
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time=6
+x = 16
+
+[State 210, 2]
+type = HitDef
+trigger1 = time=0
+attr = C, HP
+animtype  = Hard
+damage    = 32,3
+hitflag = MAF
+guardflag = U
+pausetime = 12,6
+sparkno = -1
+guard.sparkno = 40 
+sparkxy = -10,-42
+hitsound   = S1,10
+guardsound = S3,1
+ground.type = High
+ground.slidetime = 90
+ground.hittime  = 70
+ground.velocity = -8
+air.velocity = -8.2,-1
+air.hittime = 20
+air.fall = 1
+givepower = 11
+getpower = 13
+guard.velocity = -10
+guard.slidetime = 20
+;envshake.time = 7
+;envshake.ampl = 4
+ground.cornerpush.veloff = .3
+guard.cornerpush.veloff = .3
+
+[State 0, EnvShake]
+type = EnvShake
+trigger1 = movehit
+time = 1
+freq = 60
+ampl = -4
+phase = 0
+ignorehitpause = 1
+persistent = 0
+
+[State 0, Explod]
+type = Explod
+trigger1 = movehit
+anim = 7000
+pos = 48,-40
+postype = p1  ;p2,front,back,left,right
+scale = 0.75,0.75
+sprpriority = 50
+ownpal = 1
+ignorehitpause = 1
+persistent = 0
+
+[State 1240, 1]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = 2,4;
+
+[State 0, VelMul]
+type = VelMul
+trigger1 = 1
+x = 0.85
+y = 1
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = animtime=0
+value = 2500
+ctrl = 0
+
+;---------------------------------------------------------------------------
+; Beast waiting shadow command
+[Statedef 2503]
+type    = C                      ;State-type: S-stand, C-crouch, A-air, L-liedown
+movetype= I                      ;Move-type: A-attack, I-idle, H-gethit
+physics = N                      ;Physics: S-stand, C-crouch, A-air
+juggle  = 4                      ;Number of air juggle points move takes
+;Commonly-used controllers:                    
+ctrl = 0                         ;Set ctrl (Def: no change)
+poweradd = 0                    ;Power to add (Def: 0)
+sprpriority = 2                  ;Set layering priority to 2 (in front)
+
+[State 0, SprPriority]
+type = SprPriority
+trigger1 = 1
+value = 3
+
+[State 0, Trans]
+type = Trans
+trigger1 = 1
+trans = addalpha
+alpha = floor(256*((var(10)-10000)/100.00)),256-floor(256*((var(10)-10000)/100.00))
+
+[State 0, PosSet]
+type = PosAdd
+trigger1 = 1
+x = ((root,pos x+(24*root,facing))-pos x)/(16.00)*facing
+y = (root,pos y-pos y)/(16.00)
+
+[State 0, VarAdd]
+type = VarAdd
+trigger1 = var(10)<10075
+v = 10    ;fv = 
+value = 5
+
+[State 0, VarAdd]
+type = VarAdd
+trigger1 = var(40)>0 && root,stateno != 1210
+trigger1 = var(40) = 3
+v = 12    ;fv = 
+value = 200
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = var(40)>0 && root,stateno != 1210
+trigger1 = var(40) = 1
+value = 2504
+ctrl = 0
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = var(40)>0 && root,stateno != 1210
+trigger1 = var(40) = 2
+value = 2505
+ctrl = 0
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = root,stateno != 1210
+value = 2500
+ctrl = 0
+
+[State 0, Turn]
+type = Turn
+trigger1 = root,facing != facing
+
+;---------------------------------------------------------------------------
+; Beast tackle
+; CNS difficulty: easy
+[Statedef 2504]
+type    = C                      ;State-type: S-stand, C-crouch, A-air, L-liedown
+movetype= A                      ;Move-type: A-attack, I-idle, H-gethit
+physics = N                      ;Physics: S-stand, C-crouch, A-air
+juggle  = 4                      ;Number of air juggle points move takes
+;Commonly-used controllers:                    
+ctrl = 0                         ;Set ctrl (Def: no change)
+poweradd = 50                    ;Power to add (Def: 0)
+sprpriority = 2                  ;Set layering priority to 2 (in front)
+anim = 10400
+
+[State 1240, 1]
+type = PlaySnd
+trigger1 = time=4
+value = 5,13;
+
+[State 0, Trans]
+type = Trans
+trigger1 = 1
+trans = addalpha
+alpha = floor(256*((var(10)-10000)/100.00)),256-floor(256*((var(10)-10000)/100.00))
+
+[State 0, VarAdd]
+type = VarAdd
+trigger1 = var(10)<10100
+v = 10    ;fv = 
+value = 10
+ignorehitpause = 1
+
+[State 0, SprPriority]
+type = SprPriority
+trigger1 = time=0
+value = 25
+
+[State 0, Glowing Sparkles shadowbeast mode]
+type = Explod
+trigger1 = time>2 && time<9
+anim = 7101
+pos = 80,-48
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = -3,0
+accel = 0,0
+random = 16,64
+removetime = -2
+scale = 0.55,0.55
+sprpriority = 60
+ownpal = 1
+trans = sub
+angle = random%360
+xangle = 40
+supermovetime = 99999999
+ignorehitpause = 1
+
+[State 0, Glowing Sparkles shadowbeast mode]
+type = Explod
+trigger1 = time>2
+anim = 7101
+pos = 80,-48
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = -3,0
+accel = 0,0
+random = 16,64
+removetime = -2
+scale = 0.15,0.15
+sprpriority = -2
+ownpal = 1
+trans = sub
+angle = random%360
+xangle = 40
+supermovetime = 99999999
+ignorehitpause = 1
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time=6
+x = 16
+
+[State 210, 2]
+type = HitDef
+trigger1 = numtarget<1
+attr = C, ST
+animtype  = Hard
+hitflag = MAFD
+damage = 75,0
+guardflag = U
+pausetime = 12,6
+sparkno = -1
+guard.sparkno = 40 
+sparkxy = -10,-42
+hitsound   = S1,5
+guardsound = S3,0
+ground.type = High
+ground.slidetime = 90
+ground.hittime  = 70
+ground.velocity = -12.2,-4
+air.velocity = -12.2,-4
+air.hittime = 20
+air.fall = 1
+givepower = 11
+getpower = 13
+guard.velocity = -10
+guard.slidetime = 20
+;envshake.time = 7
+;envshake.ampl = 4
+ground.cornerpush.veloff = .3
+guard.cornerpush.veloff = .3
+
+[State 0, TargetState]
+type = TargetState
+triggerall = NumTarget;()
+trigger1 = 1
+value = 5601
+ID = -1
+;ignorehitpause = 
+persistent = 0
+
+[State 0, EnvShake]
+type = EnvShake
+trigger1 = movehit
+time = 8
+freq = 60
+ampl = -8
+ignorehitpause = 1
+persistent = 0
+
+[State 0, Explod]
+type = Explod
+trigger1 = movehit
+anim = 7002
+pos = 65,-72
+postype = p1  ;p2,front,back,left,right
+scale = 0.78,0.78
+sprpriority = 50
+ownpal = 1
+ignorehitpause = 1
+persistent = 0
+
+[State 0, TargetBind]
+type = null;TargetBind
+trigger1 = numtarget>0 && p2stateno = 5606
+time = 1
+id = -1
+pos = 16,-32
+
+[State 0, MoveHitReset]
+type = TargetDrop
+trigger1 = time>120 && anim = 10400
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = time>120 && anim = 10400
+value = 2500
+ctrl = 0
+
+;---------------------------------------------------------------------------
+; Beast Grab
+; CNS difficulty: easy
+[Statedef 2505]
+type    = C                      ;State-type: S-stand, C-crouch, A-air, L-liedown
+movetype= I                      ;Move-type: A-attack, I-idle, H-gethit
+physics = N                      ;Physics: S-stand, C-crouch, A-air
+juggle  = 4                      ;Number of air juggle points move takes
+;Commonly-used controllers:                    
+ctrl = 0                         ;Set ctrl (Def: no change)
+poweradd = 0                    ;Power to add (Def: 0)
+
+[State 0, Glowing Sparkles shadowbeast mode]
+type = Explod
+trigger1 = time>0 && time<15 && random%1000>time*50
+anim = 7101
+pos = 0,-48
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = -3,0
+accel = 0,0
+random = 24,64
+removetime = -2
+scale = 0.25,0.25
+sprpriority = 60
+ownpal = 1
+trans = sub
+angle = random%360
+yangle = 40
+supermovetime = 99999999
+ignorehitpause = 1
+
+[State 0, Glowing Sparkles shadowbeast mode]
+type = Explod
+trigger1 = time>0 && time<15 && random%1000>time*70
+anim = 7101
+pos = 0,-48
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = -3,0
+accel = 0,0
+random = 24,64
+removetime = -2
+scale = 0.25,0.25
+sprpriority = 60
+ownpal = 1
+trans = sub
+angle = random%360
+yangle = 40
+supermovetime = 99999999
+ignorehitpause = 1
+
+[State 0, Glowing Sparkles shadowbeast mode]
+type = Explod
+trigger1 = time>0 && time<15 && random%1000>time*90
+anim = 7101
+pos = 0,-48
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = -3,0
+accel = 0,0
+random = 24,64
+removetime = -2
+scale = 0.25,0.25
+sprpriority = 60
+ownpal = 1
+trans = sub
+angle = random%360
+yangle = 40
+supermovetime = 99999999
+ignorehitpause = 1
+
+[State 0, Glowing Sparkles shadowbeast mode]
+type = Explod
+trigger1 = time>0 && time<15 && random%1000>time*150
+anim = 7101
+pos = 0,-48
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = -3,0
+accel = 0,0
+random = 24,64
+removetime = -2
+scale = 0.25,0.25
+sprpriority = 60
+ownpal = 1
+trans = sub
+angle = random%360
+yangle = 40
+supermovetime = 99999999
+ignorehitpause = 1
+
+[State 0, Null]
+type = Null
+trigger1 = root,fvar(30)<999
+trigger1 = root,cond(1,fvar(30) := 1000,0)
+;ignorehitpause = 
+;persistent = 
+
+[State 0, VarAdd]
+type = VarAdd
+trigger1 = var(10)>10000 && time<25
+v = 10    ;fv = 
+value = -8
+
+[State 0, VarAdd]
+type = VarAdd
+trigger1 = var(10)<=10100 && time>24
+v = 10    ;fv = 
+value = 5
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = anim != 10300 && time=22
+value = 10300
+elem = 1
+
+[State 0, PosSet]
+type = PosAdd
+trigger1 = time<30
+x = ((enemynear,pos x-(enemynear,facing*320))-pos x)/(50.00)*facing
+y = ((enemynear,pos y)-pos y)/(50.00)
+
+[State 0, PosSet]
+type = PosAdd
+trigger1 = time>30
+x = ((enemynear,pos x-(enemynear,facing*32))-pos x)/(3.00)*facing
+y = ((enemynear,pos y)-pos y)/(3.00)
+
+[State 0, SprPriority]
+type = SprPriority
+trigger1 = 1
+value = -25
+
+[State 0, Turn]
+type = Turn
+trigger1 = time=20
+
+[State 0, ReversalDef]
+type = HitDef
+trigger1 = 1
+attr = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+hitflag = MAF        ;HLAFD+-
+guardflag = U
+;affectteam = E          ;B,E,F
+animtype = light          ;light,medium,hard,back,up,diagup
+air.animtype = light
+forcestand = 1
+pausetime = 0,26
+id = 2500
+
+[State 0, ReversalDef]
+type = null;ReversalDef
+trigger1 = 1
+reversal.attr = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+pausetime = 0,26
+;sparkxy = 0,0 ;offset
+;hitsound = S1,0
+pausetime = 0,30
+id = 2500
+;p2stateno = 2502
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = time=25
+statetype = C
+movetype = A
+
+[State 0, VelMul]
+type = VelMul
+trigger1 = 1
+x = 0.8
+y = 0.9
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = time>80
+value = 2500
+ctrl = 0
+
+[State 0, ChangeState]
+type = ChangeState
+triggerall = NumTarget
+trigger1 = 1
+value = 2506
+
+[State 1240, 1]
+type = PlaySnd
+trigger1 = time=4
+value = 5,20;
+
+[State 0, Trans]
+type = Trans
+trigger1 = 1
+trans = addalpha
+alpha = floor(256*((var(10)-10000)/100.00)),256-floor(256*((var(10)-10000)/100.00))
+
+;---------------------------------------------------------------------------
+; Beast Hold
+; CNS difficulty: easy
+[Statedef 2506]
+type    = C                      ;State-type: S-stand, C-crouch, A-air, L-liedown
+movetype= I                      ;Move-type: A-attack, I-idle, H-gethit
+physics = N                      ;Physics: S-stand, C-crouch, A-air
+juggle  = 4                      ;Number of air juggle points move takes
+;Commonly-used controllers:                    
+ctrl = 0                         ;Set ctrl (Def: no change)
+poweradd = 0                    ;Power to add (Def: 0)
+
+[State 0, TargetBind]
+type = TargetBind
+trigger1 = 1
+time = 1
+id = -1
+pos = 32,-0
+
+[State 1240, 1]
+type = PlaySnd
+trigger1 = time=4
+value = 1,9;
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = 1
+y = pos y*0.95
+
+[State 0, TargetState]
+type = TargetState
+trigger1 = NumTarget;()
+value = 2507
+ID = -1
+
+[State 0, TargetDrop]
+type = TargetDrop
+trigger1 = time>200
+excludeID = -1
+keepone = 1
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = time>200 || numtarget<1
+value = 2500
+
+[State 0, Trans]
+type = Trans
+trigger1 = 1
+trans = addalpha
+alpha = floor(256*((var(10)-10000)/100.00)),256-floor(256*((var(10)-10000)/100.00))
+
+;---------------------------
+; P2-Beast Hold
+[Statedef 2507]
+type = A
+physics = N
+movetype = H
+ctrl = 0
+
+[State 0, PlayerPush]
+type = PlayerPush
+trigger1 = 1
+value = 0
+
+[State 820, 1]
+type = ChangeAnim2
+trigger1 = time = 0
+value = 1701
+
+[State 0, HitBy]
+type = HitBy
+trigger1 = 1
+value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+;value2 = S,NA
+time = 1
+
+[State 0, SelfState]
+type = SelfState
+trigger1 = Time>5
+value = 5030
+
+;---------------------------------------------------------------------------
+; Beast Blocking
+; CNS difficulty: easy
+[Statedef 2508]
+type    = C                      ;State-type: S-stand, C-crouch, A-air, L-liedown
+movetype= I                      ;Move-type: A-attack, I-idle, H-gethit
+physics = N                      ;Physics: S-stand, C-crouch, A-air
+juggle  = 4                      ;Number of air juggle points move takes
+;Commonly-used controllers:                    
+ctrl = 0                         ;Set ctrl (Def: no change)
+poweradd = 0                    ;Power to add (Def: 0)
+
+[State 0, Helper]
+type = Helper
+trigger1 = numhelper(2509)<1
+helpertype = normal ;player
+name = "Shield effect"
+ID = 2509
+stateno = 2509
+pos = 0,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 0
+pausemovetime = 0
+
+[State 0, VarAdd]
+type = VarAdd
+trigger1 = 1
+v = 12    ;fv = 
+value = -1
+
+[State 0, VarAdd]
+type = VarAdd
+trigger1 = var(10)<10060
+v = 10    ;fv = 
+value = 8
+
+[State 0, SprPriority]
+type = SprPriority
+trigger1 = anim != 10099
+value = 5
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = anim != 10201
+value = 10201
+elem = 1
+
+[State 0, PosSet]
+type = PosAdd
+trigger1 = 1
+x = ((root,pos x+(facing*8))-pos x)/(3.00)*facing
+y = ((root,pos y-4)-pos y)/(3.00)
+
+[State 0, ReversalDef]
+type = ReversalDef
+trigger1 = 1
+reversal.attr = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+pausetime = 0,26
+;sparkxy = 0,0 ;offset
+;hitsound = S1,0
+pausetime = 0,30
+id = 2500
+;p2stateno = 2502
+
+[State 0, ChangeState]
+type = ChangeState
+triggerall = var(12)<1
+trigger1 = !((root,movetype = H || root,stateno = [120,130]) && root,stateno = [100,200])
+value = 2501
+ctrl = 0
+
+[State 0, Trans]
+type = Trans
+trigger1 = 1
+trans = addalpha
+alpha = floor(256*((var(10)-10000)/100.00)),256-floor(256*((var(10)-10000)/100.00))
+
+[State 0, Turn]
+type = Turn
+trigger1 = root,facing != facing
+
+;---------------------------------------------------------------------------
+; Beast Blocking Shield
+; CNS difficulty: easy
+[Statedef 2509]
+type    = C                      ;State-type: S-stand, C-crouch, A-air, L-liedown
+movetype= I                      ;Move-type: A-attack, I-idle, H-gethit
+physics = N                      ;Physics: S-stand, C-crouch, A-air
+juggle  = 4                      ;Number of air juggle points move takes
+;Commonly-used controllers:                    
+ctrl = 0                         ;Set ctrl (Def: no change)
+poweradd = 0                    ;Power to add (Def: 0)
+anim = 0
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+;value2 = S,NA
+time = 1000
+
+[State 0, VarAdd]
+type = VarAdd
+trigger1 = var(10)<100 && parent,stateno = 2508
+v = 10    ;fv = 
+value = 10
+
+[State 0, VarAdd]
+type = VarAdd
+trigger1 = parent,stateno != 2508
+v = 10    ;fv = 
+value = -10
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = var(10)<0
+id = 25089
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = var(10)<0
+id = 25090
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = var(10)<0
+
+[State 0, PalFX]
+type = PalFX
+trigger1 = 1
+time = 1
+add = 0,0,0
+mul = floor(var(10)*(256/100.00)),floor(var(10)*(256/100.00)),floor(var(10)*(256/100.00))
+;sinadd = 0,0,0,10
+invertall = 0
+color = 256
+
+[State 0, Explod]
+type = Explod
+trigger1 = time<3
+anim = 10013
+ID = 25089
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = -1
+vfacing = 1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -1
+pausemovetime = 0
+scale = 0.25,0.7
+sprpriority = 20
+ownpal = 0
+removeongethit = 0
+trans = sub
+angle = 90
+
+[State 0, Explod]
+type = Explod
+trigger1 = time<3
+anim = 10014
+ID = 25089
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = -1
+vfacing = 1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -1
+pausemovetime = 0
+scale = 0.25,0.7
+sprpriority = -25
+ownpal = 0
+removeongethit = 0
+trans = sub
+angle = 90
+
+[State 0, Explod]
+type = Explod
+trigger1 = time<3
+anim = 10013
+ID = 25090
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = -1
+vfacing = 1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -1
+pausemovetime = 0
+scale = 0.22,0.6
+sprpriority = 22
+ownpal = 0
+removeongethit = 0
+trans = add
+angle = 90
+
+[State 0, Explod]
+type = Explod
+trigger1 = time<3
+anim = 10014
+ID = 25090
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = -1
+vfacing = 1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -1
+pausemovetime = 0
+scale = 0.22,0.6
+sprpriority = -22
+ownpal = 0
+removeongethit = 0
+trans = add
+angle = 90
+
+
+
+
+
+[State 0, Explod]
+type = Explod
+trigger1 = time<3
+anim = 10014
+ID = 25089
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = -1
+vfacing = 1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -1
+pausemovetime = 0
+scale = -0.25,0.7
+sprpriority = 20
+ownpal = 0
+removeongethit = 0
+trans = sub
+angle = 90
+
+[State 0, Explod]
+type = Explod
+trigger1 = time<3
+anim = 10013
+ID = 25090
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = -1
+vfacing = 1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -1
+pausemovetime = 0
+scale = -0.22,0.6
+sprpriority = 22
+ownpal = 0
+removeongethit = 0
+trans = add
+angle = 90
+
+[State 0, Explod]
+type = Explod
+trigger1 = time<3
+anim = 10013
+ID = 25089
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = -1
+vfacing = 1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -1
+pausemovetime = 0
+scale = -0.25,0.7
+sprpriority = -25
+ownpal = 0
+removeongethit = 0
+trans = sub
+angle = 90
+
+[State 0, Explod]
+type = Explod
+trigger1 = time<3
+anim = 10014
+ID = 25090
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = -1
+vfacing = 1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -1
+pausemovetime = 0
+scale = -0.22,0.6
+sprpriority = 22
+ownpal = 0
+removeongethit = 0
+trans = add
+angle = 90
+
+[State 0, Explod]
+type = null;Explod
+trigger1 = 1
+ID = 25090
+facing = root,facing
+trans = add
+
+[State 0, ModifyExplod]
+type = null;ModifyExplod
+trigger1 = 1
+ID = 25089
+facing = root,facing
+trans = sub
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = invisible
+
+[State 0, BindToParent]
+type = BindToParent
+trigger1 = time>2
+time = 1
+pos = 24,-42
+;facing = 1
+
+[State 0, ReversalDef]
+type = ReversalDef
+trigger1 = 1
+reversal.attr = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+pausetime = 0,26
+;sparkxy = 0,0 ;offset
+;hitsound = S1,0
+pausetime = 0,30
+id = 2500
+;p2stateno = 2502
+
+[State 0, Turn]
+type = null;Turn
+trigger1 = facing != parent,facing && time>3
+;ignorehitpause = 
+;persistent = 
