@@ -5,18 +5,18 @@ displayname ="Underlord"
 versiondate =1,17,2007
 mugenversion = 1.1
 author ="IDGCaptainRussia" ;Original by DDR, obviously
-pal.defaults =1,2,3,4,2,5,6    
+pal.defaults =3,2,1,4,2,5,6    
 
 ; Files for the player
 [Files]
 cmd     =underdog.cmd
-cns     =underdog.cns
+cns     =StatsNormal.cns
 st      =underdog.cns
-st1      =Normals.cns
-st2      =Specials.cns
-st3      =Hypers.cns
-st4      =System.cns
-st5      =ShadowBeast.cns
+st0      =Normals.cns
+st1      =Specials.cns
+st2      =Hypers.cns
+st3      =System.cns
+st4      =ShadowBeast.cns
 
 stcommon =common1.cns
 sprite  =underdog.sff

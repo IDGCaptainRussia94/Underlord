@@ -1,0 +1,44 @@
+; Player information
+[Info]
+name ="Underlord"
+displayname ="Underlord"
+versiondate =1,17,2007
+mugenversion = 1.1
+author ="IDGCaptainRussia" ;Original by DDR, obviously,Lua Supernull powered by Ziddia (https://github.com/ZiddiaMUGEN/LuaSupernull)
+pal.defaults =3,2,1,4,2,5,6    
+
+; Files for the player
+[Files]
+cmd     =underdog.cmd
+cns     =StatsEnraged.cns
+st      =supernull.st
+st0      =underdog.cns
+st1      =Normals.cns
+st2      =Specials.cns
+st3      =Hypers.cns
+st4      =System.cns
+st5      =ShadowBeast.cns
+
+stcommon =common1.cns
+sprite  =underdog.sff
+anim    =underdog.air
+sound   =underdog.snd
+pal1=underdog.act
+pal2=underdog.act
+pal3=underdog.act
+pal4=underdog.act
+pal5=underdog.act
+pal6=underdog.act
+pal7=underdog.act
+pal8=underdog.act
+pal9=underdog.act
+pal10=underdog.act
+pal11=underdog.act
+pal12=underdog.act
+
+
+
+
+[Arcade]
+intro.storyboard=intro.def
+ending.storyboard=ending.def

@@ -5688,6 +5688,31 @@ type = ChangeState
 trigger1 = (Vel y > 0) && (Pos y >= 0)
 value = 5605
 
+;------------------
+; Rage Fury Custom State
+[Statedef 5609]
+type    = A
+movetype= H
+physics = N
+velset = 0,-2
+
+[State 0, HitBy]
+type = HitBy
+trigger1 = 1
+value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+;value2 = S,NA
+time = 99999
+
+[State 1025, Anim] ;Custom animation
+type = ChangeAnim2
+trigger1 = 1
+value = 5051
+
+[State 1025, State]
+type = ChangeState
+trigger1 = time>30
+value = 5602
+
 ;---------------------------------------------------------------------------
 ; EX Helper Effect
 [Statedef 6000]

@@ -78,12 +78,15 @@ y = 0.9
 
 [State 0, ChangeState]
 type = ChangeState
+triggerall = time>2
 trigger1 = root,stateno = [119,131]
+trigger2 = root,const(movement.stand.friction)<0.60 && root,movetype = H
 value = 2508
 ctrl = 0
 
 [State 0, ChangeState]
 type = ChangeState
+triggerall = time>2
 trigger1 = root,movetype != I
 value = 2501
 ctrl = 0
@@ -252,19 +255,23 @@ value = -5
 
 [State 0, ChangeState]
 type = ChangeState
+triggerall = time>2
 trigger1 = (root,movetype = H || root,stateno = [120,130]) && root,stateno = [100,200]
 trigger2 = var(12)>0
+trigger3 = root,const(movement.stand.friction)<0.60 && root,movetype = H && random>((sysvar(3)/2)+1100)
 value = 2508
 ctrl = 0
 
 [State 0, ChangeState]
 type = ChangeState
+triggerall = time>2
 trigger1 = root,stateno = 1210
 value = 2503
 ctrl = 0
 
 [State 0, ChangeState]
 type = ChangeState
+triggerall = time>2
 trigger1 = root,movetype = I
 value = 2500
 ctrl = 0
@@ -982,7 +989,19 @@ id = 2500
 
 [State 0, ChangeState]
 type = ChangeState
+triggerall = time>5
 triggerall = var(12)<1
+triggerall = root,const(movement.stand.friction)>=0.60
+trigger1 = !((root,movetype = H || root,stateno = [120,130]) && root,stateno = [100,200])
+value = 2501
+ctrl = 0
+
+[State 0, ChangeState]
+type = ChangeState
+triggerall = time>5
+triggerall = var(12)<1
+triggerall = root,const(movement.stand.friction)<0.60
+triggerall = (root,movetype != H)
 trigger1 = !((root,movetype = H || root,stateno = [120,130]) && root,stateno = [100,200])
 value = 2501
 ctrl = 0

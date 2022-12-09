@@ -1,0 +1,43 @@
+; Player information
+[Info]
+name ="Underlord"
+displayname ="Underlord"
+versiondate =1,17,2007
+mugenversion = 1.1
+author ="IDGCaptainRussia" ;Original by DDR, obviously
+pal.defaults =3,2,1,4,2,5,6    
+
+; Files for the player
+[Files]
+cmd     =underdog.cmd
+cns     =StatsNormal.cns
+st      =underdog.cns
+st0      =Normals.cns
+st1      =Specials.cns
+st2      =Hypers.cns
+st3      =System.cns
+st4      =ShadowBeast.cns
+
+stcommon =common1.cns
+sprite  =underdog.sff
+anim    =underdog.air
+sound   =underdog.snd
+pal1=underdog.act
+pal2=underdog.act
+pal3=underdog.act
+pal4=underdog.act
+pal5=underdog.act
+pal6=underdog.act
+pal7=underdog.act
+pal8=underdog.act
+pal9=underdog.act
+pal10=underdog.act
+pal11=underdog.act
+pal12=underdog.act
+
+
+
+
+[Arcade]
+intro.storyboard=intro.def
+ending.storyboard=ending.def

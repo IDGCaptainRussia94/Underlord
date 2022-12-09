@@ -1021,6 +1021,17 @@ triggerall = command = "Awaken"
 trigger1 = ctrl
 
 ;---------------------------------------------------------------------------
+;Rage Fury (Rage exclusive)
+[State -1, Rage Fury]
+type = ChangeState
+value = 4100
+triggerall = var(59) < 1 && const(movement.stand.friction)<0.60
+triggerall = !ishelper
+triggerall = command = "start"
+triggerall = statetype != A
+trigger1 = ctrl
+
+;---------------------------------------------------------------------------
 ;Hyper Shadow Baptism
 [State -1, Hyper Shadow Baptism]
 type = ChangeState
@@ -1522,3 +1533,11 @@ ownpal = 1
 supermovetime = 99999
 pausemovetime = 99999
 ignorehitpause = 1
+
+
+
+
+
+
+
+

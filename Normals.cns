@@ -2870,7 +2870,7 @@ type = HitDef
 trigger1 = AnimElem = 5
 attr = A, NA
 animtype  = Hard
-damage    = 32,2
+damage    = 30,2
 id = 650
 hitflag = MAF
 guardflag = MA
@@ -2893,6 +2893,7 @@ guard.slidetime = 20
 ground.cornerpush.veloff = .3
 guard.cornerpush.veloff = .3
 air.fall = 1
+fall.damage = 20
 fall.recover = 0
 air.velocity = -2,18
 
