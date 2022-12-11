@@ -2370,8 +2370,8 @@ phase = 90
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = time=4
-x = 8+((p2bodydist x)/8.00)
+trigger1 = time=[4,8]
+x = 16+((p2bodydist x)/8.00)
 y = 0
 
 [State 0, VelSet]

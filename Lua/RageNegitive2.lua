@@ -21,7 +21,7 @@ function userscript()
 
 
 	mugen.log("Test 0\n")
-	local current = player.current()
+	local current = player.current():root()
 	--current:lifemaxset(partner:lifemax())
 	
 	local enemy1 = current:enemy(0)
@@ -108,7 +108,7 @@ end
 
 function CodeAttacks()
 
-local current = player.current()
+local current = player.current():root()
 	local enemy1 = current:enemy(0)
 --local statedetails = current:state();
 
@@ -151,7 +151,7 @@ end
 function UltimateFreezeEnemies()
 	-- iterator for each player, skips over the caller by checking the current player's ID
 	-- (you can also fetch player using global variable CurrCharacterID directly, but referencing player.current() is probably more intuitive)
-	local current_player = player.current()
+	local current_player = player.current():root()
 
 	for p in player.player_iter() do
 		if (p:id() ~= current_player:id() and p:helperid() ~= 123456 and p:helperid() ~= 2500 and p:helperid() ~= 100000) then

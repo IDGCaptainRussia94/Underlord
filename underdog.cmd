@@ -1106,10 +1106,10 @@ trigger1 = ctrl
 trigger2 = moveContact && stateno < 3000
 
 ;---------------------------------------------------------------------------
-;Shade Avalanche
-[State -1, Shade Avalanche]
+;Shade Avalanche or Rage Fury
+[State -1, Shade Avalanche or Rage Fury]
 type = SelfState
-value = 3150
+value = ifelse(var(5) >= 500 && fvar(38)>250,4100,3150)
 triggerall = var(59) < 1 && numhelper(100000)<1
 triggerall = !ishelper
 triggerall = command = "Shade Avalanche" && var(5) >= 250
@@ -1453,8 +1453,30 @@ trigger1 = ctrl
 trigger2 = stateno < 220 || stateno = 240
 
 ;---------------------------------------------------------------------------
-;Stand Light Punch
-[State -1, Stand Heavy Kick]
+;Stand Light Kick
+[State -1, Stand Light Kick]
+type = ChangeState
+value = 230
+triggerall = var(59) < 1 && numhelper(100000)<1
+triggerall = command = "a"
+triggerall = statetype = S
+trigger1 = ctrl
+trigger2 = stateno = 200
+
+;---------------------------------------------------------------------------
+;Stand Med Kick
+[State -1, Stand Med Kick]
+type = ChangeState
+value = 240
+triggerall = var(59) < 1 && numhelper(100000)<1
+triggerall = command = "b"
+triggerall = statetype = S
+trigger1 = ctrl
+trigger2 = stateno < 220 || stateno = 230
+
+;---------------------------------------------------------------------------
+;Stand KOF Kick
+[State -1, Stand KOF Kick]
 type = ChangeState
 value = 250
 triggerall = var(59) < 1 && numhelper(100000)<1

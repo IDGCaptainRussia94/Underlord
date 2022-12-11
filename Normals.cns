@@ -524,8 +524,21 @@ ctrl = 0
 
 [State 0, ChangeState]
 type = ChangeState
+trigger1 = numhelper(100000)>0 && enemy,statetype = L
+value = ifelse(random<500,230,400)
+ctrl = 0
+
+[State 0, ChangeState]
+type = ChangeState
 trigger1 = movehit && numhelper(100000)>0
-value = 210
+value = ifelse((random<250 || (moveguarded && enemy,statetype = S)) && !ishelper,230,ifelse(random<600,210,240))
+ctrl = 0
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = numhelper(100000)>0 && !ishelper
+trigger1 = AnimTime = 0 && random<500
+value = 900
 ctrl = 0
 
 [State 200, 7]
@@ -535,7 +548,7 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-; Standing strong punch
+; Standing med punch
 ; CNS difficulty: easy
 [Statedef 210]
 type    = S
@@ -620,12 +633,6 @@ supermovetime = 99999
 pausemovetime = 99999
 ignorehitpause = 1
 
-[State 0, ChangeState]
-type = ChangeState
-trigger1 = movehit && numhelper(100000)>0
-value = 220
-ctrl = 0
-
 [State 210, 5]
 type = ChangeState
 trigger1 = AnimTime = 0
@@ -651,6 +658,13 @@ y = 0
 ;ignorehitpause = 0
 ;persistent = 1
 
+[State 220, VelSet]
+type = VelAdd
+trigger1 = numtarget(220000)>0
+x = 12 
+persistent = 0
+ignorehitpause = 1
+
 [State 220, a]
 type = ChangeAnim
 trigger1 = time = 0
@@ -663,13 +677,40 @@ value = 2, 3
 
 [State 220, 3]
 type = Hitdef
+trigger1 = Animelem = 3
+hitflag = MAF
+attr = S, NA
+animtype  = Med
+damage    = 18,5
+id = 220000
+guardflag = MA
+pausetime = 4,14
+sparkno = -1
+guard.sparkno = 40 
+guard.pausetime = 5, 9
+sparkxy = -15,-40
+hitsound   = S1,1
+guardsound = S3,2
+ground.type = High
+ground.velocity = -3, 0
+ground.hittime = 15
+air.velocity = -4,-4
+guard.slidetime = 17
+guard.velocity = -20
+guard.slidetime = 20
+givepower = 60
+getpower = 80
+
+[State 220, 3]
+type = Hitdef
 trigger1 = Animelem = 4
 hitflag = MAF
 attr = S, NA
 animtype  = Med
-damage    = 28,5
+id = 220001
+damage    = 20,5
 guardflag = MA
-pausetime = 6,14
+pausetime = 5,14
 sparkno = -1
 guard.sparkno = 40 
 guard.pausetime = 5, 9
@@ -691,7 +732,20 @@ airguard.cornerpush.veloff = -28
 
 [State 0, Explod]
 type = Explod
-trigger1 = movehit
+trigger1 = numtarget(220000)>0
+anim = 7000
+pos = 54,-64
+vel = 0,-1
+postype = p1  ;p2,front,back,left,right
+scale = 0.65,0.65
+sprpriority = 50
+ownpal = 1
+ignorehitpause = 1
+persistent = 0
+
+[State 0, Explod]
+type = Explod
+trigger1 = numtarget(220001)>0
 anim = 7001
 pos = 50,-42
 postype = p1  ;p2,front,back,left,right
@@ -715,14 +769,14 @@ value = 0
 type = null
 triggerall = numhelper(100000)>0
 triggerall = (numhelper(1961)>0 && helper(1961),var(10)>30) || numhelper(7000)>0
-trigger1 = AnimTime = 0 || (movehit && numhelper(7000)>0)
+trigger1 = AnimTime = 0 || ((movehit && numtarget(220001)>0) && numhelper(7000)>0)
 trigger1 = helper(100000),cond(1,var(8) := -999,0)
 
 [State 0, VarSet]
 type = VarSet
 triggerall = numhelper(100000)>0
 triggerall = (numhelper(1961)>0 && helper(1961),var(10)>30) || numhelper(7000)>0
-trigger1 = AnimTime = 0 || (movehit && numhelper(7000)>0)
+trigger1 = AnimTime = 0 || ((movehit && numtarget(220001)>0) && numhelper(7000)>0)
 v = 9    ;fv = 10
 value = ifelse(enemynear,pos y<-16,1070,200)
 
@@ -730,7 +784,7 @@ value = ifelse(enemynear,pos y<-16,1070,200)
 type = ChangeState
 triggerall = numhelper(100000)>0
 triggerall = (numhelper(1961)>0 && helper(1961),var(10)>30) || numhelper(7000)>0
-trigger1 = AnimTime = 0 || (movehit && numhelper(7000)>0)
+trigger1 = AnimTime = 0 || ((((movehit) && numtarget(220001)>0) || moveguarded) && numhelper(7000)>0)
 value = 1000
 ctrl = 0
 
@@ -750,13 +804,13 @@ ctrl = 0
 type = null
 triggerall = !(numhelper(1961)>0 && helper(1961),var(10)>30)
 triggerall = numhelper(100000)>0
-trigger1 = movehit
+trigger1 = (movehit && numtarget(220001)>0)
 trigger1 = helper(100000),cond(1,var(8) := 0,0)
 
 [State 0, ChangeState]
 type = ChangeState
 triggerall = !(numhelper(1961)>0 && helper(1961),var(10)>30)
-trigger1 = movehit && numhelper(100000)>0
+trigger1 = (movehit && numtarget(220001)>0) && numhelper(100000)>0
 value = 1019
 ctrl = 0
 
@@ -773,274 +827,165 @@ ctrl = 1
 type    = S
 movetype= A
 physics = S
-juggle  = 2
-poweradd= 14
+juggle  = 4
+poweradd= 40
 ctrl = 0
-sprpriority = 2
-velset = 2,0
-persistent = 1
+velset = 0,0
+sprpriority = 5
 
-[State 230, VelSet]
-type = VelSet
-trigger1 = prevstateno = 200
-trigger1 = command = "holdfwd"
-trigger1 = P2dist y <= -1
-x = 3 
-y = 0
-persistent = 1 
-
-[State 250]
-type = null;Explod
-trigger1 = Time = 0
-trigger1 = command = "holdfwd"
-trigger1 = P2dist y <= -5
-;anim = 6090
-anim = 6320
-postype = p1
-pos = 0, 10
-bindtime = 1
-removetime = 29
-ownpal = 1
-sprpriority = 6
-removeongethit = 1
-
-[State 230, a]
+[State 210, a]
 type = ChangeAnim
-triggerall = numhelper(4094) = 0
 trigger1 = time = 0
 value = 230 
 
-[State 210, a]
-type = ChangeAnim
-triggerall = numhelper(4094) = 1
-trigger1 = time = 0
-value = 231 
-
-[State 210, a]
-type = ChangeAnim
-triggerall = numhelper(4191) = 1
-trigger1 = time = 0
-value = 7237
-
-[State 221, PlaySnd]
+[State 210, 1]
 type = PlaySnd
-trigger1 = Time = 3
-value = 7,160 
+trigger1 = Time = 0
+value = 2, 1
 
-[State 230, 1]
-type = PlaySnd
-trigger1 = Time = 2
-value = 7, 138
+[State 220, 1]
+type = Playsnd
+trigger1 = AnimElem = 2
+value = 7, 144
 
-[State 230, 2]
-type = HitDef
+[State 210, 2]
+type = Hitdef
 trigger1 = AnimElem = 4
 attr = S, NA
-animtype  = Light
-damage    = 18,3
-hitflag = MAF
-guardflag = MA
-pausetime = 2,3
-sparkno = 0
-guard.sparkno = 40 
-sparkxy = 0,-22
-hitsound   = S1,2
-guardsound = 6,0
-ground.type = High
-ground.slidetime = 4
-ground.hittime  = 23
-ground.velocity = -2.2
-air.velocity = -3.2,-4
-givepower = 11
-getpower = 13
-guard.velocity = -10
-guard.slidetime = 20
-ground.cornerpush.veloff = 1
-guard.cornerpush.veloff = 1
-
-[State 230, 2]
-type = HitDef
-trigger1 = AnimElem = 5
-attr = S, NA
-animtype  = Light
-damage    = 18
-hitflag = MAF
-guardflag = MA
-pausetime = 11,11
-sparkno = 0
-guard.sparkno = 40 
-sparkxy = 15,-30
-guardsound = 6,0
-ground.type = High
-ground.slidetime = 4
-ground.hittime  = 13
-ground.velocity = -2.2
-air.velocity = -3.2,-4
-givepower = 11
-getpower = 13
-guard.velocity = -10
-guard.slidetime = 20
-envshake.time = 7
-envshake.ampl = 4
-ground.cornerpush.veloff = 1
-guard.cornerpush.veloff = 1
-
-[State 400, 2]
-type = HitDef
-triggerall = numhelper(4191) = 1
-trigger1 = AnimElem = 2
-attr = C, NA
-damage    = 38,3
-priority  = 3
-animtype  = Light
-hitflag = MAFD
+animtype  = light
+damage    = 24,3
+hitflag = MFD
 guardflag = L
-pausetime = 9,9
-sparkno = 0
+pausetime = 6,8
+sparkno = -1
 guard.sparkno = 40 
-sparkxy = 0,-53
-hitsound   = S1,5
-guardsound = 6,0
+sparkxy = -5,-35
+hitsound   = S1,3
+guardsound = S3,1
 ground.type = Low
-ground.slidetime = 12
-ground.hittime  = 12
-ground.velocity = -4.2
-air.velocity = -1.5,-3
-givepower = 12
-getpower = 19
+ground.slidetime = 4
+ground.hittime  = 16
+ground.velocity = -2.2
+air.velocity = -1, 2
+givepower = 11
+getpower = 13
 guard.velocity = -10
+guard.slidetime = 20
+ground.cornerpush.veloff = 1
+guard.cornerpush.veloff = 1
 
-[State 420, 1]
-type = PlaySnd
-trigger1 = AnimElem = 1
-value = 8, 70
+[State 0, Explod]
+type = Explod
+trigger1 = movehit
+anim = 7000
+pos = 32,-20
+postype = p1  ;p2,front,back,left,right
+scale = -0.6,0.6
+sprpriority = 50
+ownpal = 1
+ignorehitpause = 1
+persistent = 0
 
-[State 230, b]
-type = Width
-trigger1 = 1
-value = 5, 0
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = movehit && numhelper(100000)>0
+value = 240
+ctrl = 0
 
-[State 230, 3]
+[State 210, 5]
 type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
+
 ;---------------------------------------------------------------------------
-; Standing Medium kick
+; Standing med kick
 ; CNS difficulty: easy
 [Statedef 240]
 type    = S
 movetype= A
 physics = S
-juggle  = 5
-poweradd= 35
+juggle  = 4
+poweradd= 40
 ctrl = 0
-sprpriority = 2
-velset = 2,0
-
-[State 221, PlaySnd]
-type = PlaySnd
-trigger1 = Time = 0
-value = 7,144
-
-[State 240, a]
-type = ChangeAnim
-triggerall = numhelper(4094) = 0
-trigger1 = time = 0
-value = 240 
-
-[State 0, ChangeAnim]
-type = ChangeAnim
-triggerall = numhelper(4094) = 1
-trigger1 = time = 0
-value = 241
+velset = 0,0
+sprpriority = 5
 
 [State 210, a]
 type = ChangeAnim
-triggerall = numhelper(4191) = 1
 trigger1 = time = 0
-value = 7238
+value = 240 
 
-[State 240, 1]
+[State 210, 1]
 type = PlaySnd
-trigger1 = Time = AnimElem = 4
-value = 4, 5
+trigger1 = Time = 0
+value = 2, 3
 
-[State 240, 2]
-type = HitDef
-triggerall = numhelper(4094) = 0
+[State 220, 1]
+type = Playsnd
+trigger1 = AnimElem = 4
+value = 7, 144
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time<8
+x = 4
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time>16 && time <24
+x = -4
+
+[State 210, 2]
+type = Hitdef
 trigger1 = AnimElem = 4
 attr = S, NA
-animtype  = Medium
-damage    = 30,3
-hitflag = MAF
+animtype  = med
+damage    = 34,5
+hitflag = MF
 guardflag = MA
-pausetime = 8,8
-sparkno = 1
-guard.sparkno = 40
-sparkxy = -15,-36
-hitsound   = S1,3
-guardsound = 6,0
-ground.type = Low
-ground.slidetime = 4
-ground.hittime  = 11
-ground.velocity = -1
-air.velocity = -1.8,-5
-givepower = 20
-getpower = 30
-guard.velocity = -15
-guard.slidetime = 20
-
-[State 240, 2]
-type = null;HitDef
-triggerall = numhelper(4094) = 0
-trigger1 = AnimElem = 5
-attr = C, NA
-damage    = 41,7
-animtype  = Up
-hitflag = MAF
-guardflag = MA
-pausetime = 13,13
-sparkxy = 0,-45
-sparkno = 3
+pausetime = 7,9
+sparkno = -1
 guard.sparkno = 40 
-hitsound   = S1,7
-guardsound = 6,0
-guard.velocity = -18
-guard.hittime = 12
-ground.type = High
-ground.hittime  = 20
-ground.velocity = -.8, -4
-guard.slidetime = 15
-air.velocity = -1,-7
-givepower = 40
-getpower = 80
-envshake.time = 7
-envshake.ampl = 4
+sparkxy = -5,-35
+hitsound   = S1,4
+guardsound = S3,2
+ground.type = high
+ground.slidetime = 4
+ground.hittime  = 16
+ground.velocity = -3.2
+air.velocity = -1, 2
+givepower = 12
+getpower = 20
+guard.velocity = -10
+guard.slidetime = 20
+ground.cornerpush.veloff = 1
+guard.cornerpush.veloff = 1
 
-[State 2041]
-type = ScreenBound
-trigger1 = p2Dist x >= 200
-trigger1 = p2Dist y < 0
-trigger1 = P2stateno = 5050
-value = 0
-movecamera = 0
+[State 0, Explod]
+type = Explod
+trigger1 = movehit
+anim = 7001
+pos = 42,-32
+postype = p1  ;p2,front,back,left,right
+scale = 0.6,0.4
+sprpriority = 50
+ownpal = 1
+ignorehitpause = 1
+persistent = 0
 
-[State 240, 4]
+[State 0, ChangeState]
 type = ChangeState
-trigger1 = p2Dist x <= 300
-trigger1 = Time >= 22
+trigger1 = movehit && numhelper(100000)>0
+value = 220
+ctrl = 0
+
+[State 210, 5]
+type = ChangeState
+trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
 
-[State 240, 4]
-type = ChangeState
-trigger1 = p2Dist x >= 200
-trigger1 = p2Dist y < 0
-trigger1 = Time >= 70
-trigger1 = P2stateno = 5050
-value = 0
-ctrl = 1
 ;---------------------------------------------------------------------------
 ; Standing Hard kick
 [Statedef 250]

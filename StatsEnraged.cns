@@ -1,15 +1,15 @@
 [Data]
   ;Amount of life to start with
 life = 1000
-power = 5000
+power = 100000
   ;attack power (more is stronger)
-attack = 100
+attack = 120
   ;defensive power (more is stronger)
 defence = 100
   ;Percentage to increase defense everytime player is knocked down
-fall.defence_up = 50
+fall.defence_up = 250
   ;Time which player lies down for, before getting up
-liedown.time = 30
+liedown.time = 60
   ;Number of points for juggling
 airjuggle = 10000
   ;Default hit spark number for HitDefs

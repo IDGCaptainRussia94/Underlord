@@ -1,285 +1,3 @@
-;---------------------------------------------------------------------------
-; Not fucking around mode
-[Statedef 123456]
-movetype = I                      ;Move-type: A-attack, I-idle, H-gethit
-physics = N                      ;Physics: S-stand, C-crouch, A-air
-juggle  = 4                      ;Number of air juggle points move takes
-;Commonly-used controllers:                    
-ctrl = 0                         ;Set ctrl (Def: no change)
-poweradd = 0                    ;Power to add (Def: 0)
-sprpriority = 2                  ;Set layering priority to 2 (in front)
-anim = 6100
-velset = 0,0
-
-[State -2, Execute File]
-type = LuaFile
-triggerall = time>30 && const(movement.stand.friction)<0.60
-trigger1 = root,life < 2
-lua = "Lua/AboutToDie.lua"
-supermove = 99999
-pausemove = 99999
-ignorehitpause = 1
-persistent = 256
-
-[State 0, PalFX]
-type = PalFX
-trigger1 = 1
-time = 1
-add = 0,0,0
-mul = 120,120,120
-;sinadd = 0,0,0,10
-invertall = 1
-color = 0
-ignorehitpause = 255
-supermovetime = 999999999
-pausemovetime = 999999999
-
-[State 0, Explod]
-type = Explod
-trigger1 = time<20
-anim = 7000
-pos = 0,-48
-postype = p1  ;p2,front,back,left,right
-facing = 1
-vfacing = 1
-bindtime = 1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 0
-scale = time*0.10,time*0.20
-sprpriority = 0
-trans = add
-ignorehitpause = 255
-supermovetime = 999999999
-pausemovetime = 999999999
-
-[State 0, Explod]
-type = Explod
-trigger1 = time<20
-anim = 7000
-pos = 0,-48
-postype = p1  ;p2,front,back,left,right
-facing = 1
-vfacing = 1
-bindtime = 1
-vel = 0,-time*0.50
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 0
-scale = time*0.05,time*0.10
-sprpriority = -25
-trans = add
-ignorehitpause = 255
-supermovetime = 999999999
-pausemovetime = 999999999
-
-
-[State 0, Explod]
-type = Explod
-trigger1 = time<20
-anim = 7000
-pos = 0,-48
-postype = p1  ;p2,front,back,left,right
-facing = 1
-vfacing = 1
-bindtime = 1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 0
-scale = time*0.05,time*0.10
-sprpriority = 25
-trans = add
-ignorehitpause = 255
-supermovetime = 999999999
-pausemovetime = 999999999
-
-[State 0, EnvShake]
-type = EnvShake
-trigger1 = time=5
-time = 60
-freq = 40
-ampl = -5
-phase = 90
-ignorehitpause = 255
-supermovetime = 999999999
-pausemovetime = 999999999
-
-[State 0, PlaySnd]
-type = PlaySnd
-trigger1 = time=1
-value = S7,305
-ignorehitpause = 255
-supermovetime = 999999999
-pausemovetime = 999999999
-
-[State 0, PlaySnd]
-type = PlaySnd
-trigger1 = time=1
-value = S5,23
-ignorehitpause = 255
-supermovetime = 999999999
-pausemovetime = 999999999
-
-
-[State 0, AssertSpecial]
-type = AssertSpecial
-trigger1 = 1
-flag = invisible
-ignorehitpause = 255
-supermovetime = 999999999
-pausemovetime = 999999999
-
-[State 0, PosSet]
-type = PosSet
-trigger1 = 1
-x = root,pos X
-y = root,pos Y
-ignorehitpause = 255
-supermovetime = 999999999
-pausemovetime = 999999999
-
-[State 0, Glowing Sparkles]
-type = Explod
-triggerall = const(movement.stand.friction)<0.60
-triggerAll = root,stateno<700 && (root,stateno>199 || root,stateno<160)
-trigger1 = roundstate < 2 && root,Time%6=0
-trigger2 = roundstate >= 2 && GameTime%6=0
-pausemovetime = 99999
-supermovetime = 99999
-
-anim = 8840
-random = 26,16
-pos = 0,-16
-postype = p1
-vel = vel x/(1.00+abs(vel x/3.00))/1.00, (-1)-(random/200.00)
-removetime = -2
-sprpriority = -4+random%8
-ignorehitpause = 255
-supermovetime = 999999999
-pausemovetime = 999999999
-angle = 90
-
-[State 0, Not fucking around fx]
-type = Explod
-trigger1 = const(movement.stand.friction)<0.60 && gametime%3=0
-anim = 7109
-ID = 7109
-bindtime = 0
-pos = 0,-8
-postype = p1
-removetime = 10+random%10
-scale = 0.75+(random/3200.00),0.35+(random/2500.00)
-random = 24,32
-sprpriority = -25
-ownpal = 0
-vel = (vel x/2)+(random-500)*0.0015, (vel y/3)+(random-500)*0.0015
-trans = add
-;alpha = 150,255
-ignorehitpause = 255
-supermovetime = 999999999
-pausemovetime = 999999999
-
-[State 0, Not fucking around fx]
-type = Explod
-trigger1 = const(movement.stand.friction)<0.60 && gametime%3=0
-anim = 7109
-ID = 7109
-bindtime = 5
-pos = 0,-8
-postype = p1
-removetime = 10+random%10
-scale = 0.5+(random/3200.00),0.25+(random/2500.00)
-random = 24,32
-sprpriority = 2
-ownpal = 1
-vel = (vel x/2)+(random-500)*0.0025, (vel y/3)+(random-500)*0.0025
-trans = addalpha
-alpha = 100,255
-ignorehitpause = 255
-supermovetime = 999999999
-pausemovetime = 999999999
-
-
-
-[State 0, Special Rage Move Effects]
-type = Explod
-trigger1 = root,stateno = 4100 && root,time<160 && root,time>150
-anim = 6004
-pos = 0,-46
-postype = p1  ;p2,front,back,left,right
-facing = -1
-vfacing = -1
-bindtime = 1
-removetime = -2
-random = 0,0
-scale = 4+(root,time-150)/3.00,3+(root,time-150)/3.00
-sprpriority = 280
-ownpal = 0
-removeongethit = 0
-trans = add
-supermovetime = 99999
-pausemovetime = 99999
-angle = random%360
-
-[State 0, Special Rage Move Effects]
-type = Explod
-trigger1 = root,stateno = 4100 && root,time>160
-anim = 8840
-id = 4100
-pos = -80+random%400,360
-postype = back  ;p2,front,back,left,right
-facing = -1
-vfacing = -1
-bindtime = 1
-vel = (500-random%1000)/500.00,-8+(-random%500)/100.00
-removetime = -2
-random = 0,0
-scale = 2,0.5
-sprpriority = 20
-ownpal = 0
-trans = sub
-supermovetime = 99999
-pausemovetime = 99999
-angle = 80+random%20
-
-[State 0, Special Rage Move Effects]
-type = Explod
-trigger1 = root,stateno = 4100 && root,time>300
-anim = 8840
-pos = -80+random%400,360
-postype = back  ;p2,front,back,left,right
-facing = -1
-vfacing = -1
-bindtime = 1
-vel = (500-random%1000)/500.00,-8+(-random%500)/100.00
-removetime = -2
-random = 0,0
-scale = 1+(root,time-300)/120.00,1+(root,time-300)/120.00
-sprpriority = 180
-ownpal = 0
-trans = add
-supermovetime = 99999
-pausemovetime = 99999
-angle = 80+random%20
-
-[State 0, RemoveExplod]
-type = RemoveExplod
-trigger1 = root,stateno = 4100 && root,time>449
-id = 4100
-supermovetime = 99999
-pausemovetime = 99999
-
-[State 0, DestroySelf]
-type = DestroySelf
-trigger1 = const(movement.stand.friction)>=0.60
-ignorehitpause = 255
-supermovetime = 999999999
-pausemovetime = 999999999
 
 
 ;---------------------------------------------------------------------------
@@ -429,19 +147,6 @@ pausemove = 99999
 [Statedef -2]
 
 
-[State -2, Execute File]
-type = LuaFile
-triggerall = !IsHelper && const(movement.stand.friction)<0.60
-trigger1 = numhelper(123456)>0
-trigger1 = helper(123456),time<10
-trigger2 = stateno>=4100 && stateno<4500
-lua = "Lua/RageNegitive2.lua"
-supermove = 99999
-pausemove = 99999
-ignorehitpause = 1
-persistent = 256
-
-
 ;; rage mode lua stuff, pretty cool
 ;[State -2, Execute Lua]
 ;type = DisplayToClipboard
@@ -455,7 +160,7 @@ persistent = 256
 
 
 ;---------------------------------------------------------------------------
-;Rage Fury
+;Rage Fury, only used in Enraged Mode
 [State -1, Rage Fury AI only]
 type = SelfState
 value = 4100
@@ -469,17 +174,17 @@ trigger1 = ctrl && var(5) >= 600 && random%1000<helper(100000),var(5)
 trigger2 = movereversed && helper(100000),var(55)>100
 trigger3 = movetype != A && sysvar(3)<-500 && stateno != 4100 && random>(-(sysvar(3)-500)/4.00)
 
-;Shade Avalanche
+;Shade Avalanche, may use Rage Fury if they meet the requirements instead
 [State -1, Shade Avalanche AI only]
 type = SelfState
-value = 3150
+value = ifelse(var(5) >= 500 && fvar(38)>250 && const(movement.stand.friction)>=0.60,4100,3150)
 triggerall = !win && roundstate = 2
 triggerall = numhelper(100000)>0
 triggerall = helper(100000),var(50)<0
 triggerall = !ishelper
 triggerall = var(5) >= 250
 triggerall = statetype != A
-triggerall = const(movement.stand.friction)>=0.60 || (const(movement.stand.friction)<0.60 && random<20)
+triggerall = const(movement.stand.friction)>=0.60 || (const(movement.stand.friction)<0.60 && random<25)
 trigger1 = ctrl && random%1000<10+helper(100000),var(55)
 trigger2 = ctrl && var(5) >= 600 && random%1000<helper(100000),var(5)
 trigger3 = movereversed && helper(100000),var(55)>100
