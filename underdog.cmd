@@ -1024,8 +1024,8 @@ trigger1 = ctrl
 ;Rage Fury (Rage exclusive)
 [State -1, Rage Fury]
 type = ChangeState
-value = 4100
-triggerall = var(59) < 1 && const(movement.stand.friction)<0.60
+value = 4150
+triggerall = var(59) < 1; && const(movement.stand.friction)<0.60
 triggerall = !ishelper
 triggerall = command = "start"
 triggerall = statetype != A

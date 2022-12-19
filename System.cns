@@ -158,7 +158,6 @@ pausemove = 99999
 ;pausemove = 99999999
 
 
-
 ;---------------------------------------------------------------------------
 ;Rage Fury, only used in Enraged Mode
 [State -1, Rage Fury AI only]

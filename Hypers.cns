@@ -6211,6 +6211,434 @@ supermovetime = 99999
 pausemovetime = 99999
 
 ;---------------------------------------------------------------------------
+; Gaping Maw of Nox
+[Statedef 4150]
+movetype= A                      ;Move-type: A-attack, I-idle, H-gethit
+physics = N                      ;Physics: S-stand, C-crouch, A-air
+juggle  = 4                      ;Number of air juggle points move takes
+;Commonly-used controllers:                    
+ctrl = 0                         ;Set ctrl (Def: no change)
+sprpriority = 2                  ;Set layering priority to 2 (in front)
+anim = 1018
+velset = 0,0
+
+[State 0, Pause]
+type = SuperPause
+trigger1 = time=1
+time = 30
+movetime = 30
+poweradd = 3000
+pausebg = 1
+darken = 0
+pos = 0,10000
+supermovetime = 99999
+pausemovetime = 99999
+
+[State 0, Helper]
+type = Helper
+trigger1 = time=1
+helpertype = normal ;player
+name = "Hyper LV3 Effect"
+ID = 6300
+stateno = 6300
+pos = 0,-48
+postype = p1
+facing = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 99999
+pausemovetime = 99999
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+;value2 = S,NA
+time = 1
+supermovetime = 99999
+pausemovetime = 99999
+
+[State 0, EnvShake]
+type = EnvShake
+trigger1 = time%10=0 && time>100
+time = 10
+freq = 80
+ampl = -2
+;phase = 90
+supermovetime = 99999
+pausemovetime = 99999
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = (time > 60 && time%4=0) || time=60
+value = 946
+elem = 0
+supermovetime = 99999
+pausemovetime = 99999
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = time > 60
+flag = invisible
+supermovetime = 99999
+pausemovetime = 99999
+
+[State 0, PalFX]
+type = PalFX
+trigger1 = time>60
+time = 1
+add = 0,0,0
+mul = 150,150,150
+;sinadd = 0,0,0,10
+invertall = 1
+color = 256
+supermovetime = 99999
+pausemovetime = 99999
+
+
+[State 0, VarSet]
+type = VarAdd
+trigger1 = time=1
+v = 5    ;fv = 10
+value = -500
+supermovetime = 99999
+pausemovetime = 99999
+
+[State 0, BGPalFX]
+type = BGPalFX
+trigger1 = time<160 && time>80
+time = 1
+add = floor((time-80)*(256/80.00)),floor((time-80)*(256/80.00)),floor((time-80)*(256/80.00))
+mul = 256,256,256
+supermovetime = 99999
+pausemovetime = 99999
+
+[State 0, BGPalFX]
+type = BGPalFX
+trigger1 = time>=160
+time = 1
+add = 256,256,256
+mul = 256,256,256
+supermovetime = 99999
+pausemovetime = 99999
+
+[State 0, Glowing Sparkles]
+type = Explod
+trigger1 = time>60
+pausemovetime = 99999
+supermovetime = 99999
+
+random = 2,2
+anim = 946
+pos = 0,0
+removetime = 1
+postype = p1
+ownpal = 1
+removetime = -2
+sprpriority = -4+random%8
+ignorehitpause = 1
+
+[State 0, Explod]
+type = Explod
+trigger1 = time=110
+anim = 10028
+ID = 4150
+pos = 0,-64
+postype = p1  ;p2,front,back,left,right
+facing = -1
+vfacing = -1
+bindtime = 1
+removetime = 400
+random = 24,6
+scale = 0,0
+sprpriority = 154
+ownpal = 1
+removeongethit = 0
+trans = sub
+supermovetime = 99999
+pausemovetime = 99999
+
+[State 0, Explod]
+type = Explod
+trigger1 = time=110
+anim = 10028
+ID = 4151
+pos = 0,-64
+postype = p1  ;p2,front,back,left,right
+facing = -1
+vfacing = -1
+bindtime = 1
+removetime = 400
+random = 24,6
+scale = 0,0
+sprpriority = -150
+ownpal = 1
+removeongethit = 0
+trans = sub
+supermovetime = 99999
+pausemovetime = 99999
+
+[State 0, ModifyExplod]
+type = ModifyExplod
+trigger1 = time>=110
+ID =4150
+postype = p1  ;p2,front,back,left,right
+pos = 0, (-160+(160/((time-60)/25.00)*1.00+0.01))
+scale = (time-110)*0.02,(time-110)*0.020
+trans = add
+angle = -time
+
+[State 0, ModifyExplod]
+type = ModifyExplod
+trigger1 = time>=110
+ID = 4151
+postype = p1  ;p2,front,back,left,right
+pos = 0, (-160+(160/((time-60)/25.00)*1.00+0.01))
+scale = (time-110)*0.025,(time-110)*0.025
+trans = sub
+angle = time
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = 1
+v = 8    ;fv = 10
+value = random%360
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = time<110
+v = 9    ;fv = 10
+value = (16+random%48)
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = time>60
+x = pos x*0.925
+y = -150+(150/(1.00+(time-60)/12.00))
+
+[State 0, Explod]
+type = Explod
+trigger1 = time>60 && time<300
+anim = 7100
+pos = 0,-32
+random = 32,16
+vel = 0,6.00+(random%1000)/250.00
+postype = p1
+facing = 1
+removetime = -2
+scale = 0.10,0.25
+sprpriority = -60
+ownpal = 1
+removeongethit = 0
+trans = sub
+
+[State 0, Glowing Sparkles]
+type = Explod
+trigger1 = time<150 && time>60
+anim = 10021
+random = 0,0
+pos = Cos((var(8)/180.00)*pi)*var(9),(-160+(160/((time-60)/25.00)*1.00+0.01))+Sin((var(8)/180.00)*pi)*var(9)
+postype = p1
+vel = Cos((var(8)/180.00)*pi)*1,Sin((var(8)/180.00)*pi)*2
+removetime = -2
+sprpriority = 50+random%20
+scale = 0.15,0.35
+angle = -var(8)+90
+ownpal = 0
+
+[State 0, Glowing Sparkles]
+type = Explod
+trigger1 = time<110 && time>60
+anim = 10029
+random = 0,0
+pos = Cos((var(8)/180.00)*pi)*var(9),(-160+(160/((time-60)/25.00)*1.00+0.01))+Sin((var(8)/180.00)*pi)*var(9)
+postype = p1
+vel = Cos((var(8)/180.00)*pi)*1,Sin((var(8)/180.00)*pi)*2
+removetime = -2
+sprpriority = -150+random%200
+scale = 0.15,0.35
+angle = -var(8)+180
+ownpal = 1
+trans = sub
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = time>=110
+v = 9    ;fv = 10
+value = ((time-110)*1.40)+(16+random%48)
+
+[State 0, Glowing Sparkles]
+type = Explod
+trigger1 = time>150
+anim = 10021
+random = 0,0
+pos = Cos((var(8)/180.00)*pi)*var(9)*0.75,(-160+(160/((time-60)/25.00)*1.00+0.01))+Sin((var(8)/180.00)*pi)*var(9)*0.75
+postype = p1
+vel = Cos((var(8)/180.00)*pi)*1,Sin((var(8)/180.00)*pi)*2
+removetime = -2
+sprpriority = 50+random%20
+scale = 0.25,1.85
+angle = -var(8)+90
+ownpal = 0
+
+[State 0, Glowing Sparkles]
+type = Explod
+trigger1 = time>120
+anim = 7100
+random = 0,0
+pos = Cos((var(8)/180.00)*pi)*(var(9)-60),(-160+(160/((time-60)/25.00)*1.00+0.01))+Sin((var(8)/180.00)*pi)*(var(9)-60)
+postype = p1
+vel = Cos((var(8)/180.00)*pi)*(4+(var(9)/60.00)),Sin((var(8)/180.00)*pi)*(4+(var(9)/60.00))
+removetime = -2
+sprpriority = -50+random%120
+scale = 0.15+(var(9)/260.00),0.15+(var(9)/260.00)
+angle = -var(8)
+trans = sub
+ownpal = 1
+
+[State 0, Glowing Sparkles]
+type = Explod
+trigger1 = time>120 && random<(time-120)*25
+anim = 7100
+random = 0,0
+pos = Cos((var(8)/180.00)*pi)*(var(9)-60)*0.60,(-160+(160/((time-60)/25.00)*1.00+0.01))+Sin((var(8)/180.00)*pi)*(var(9)-60)*0.60
+postype = p1
+vel = Cos((var(8)/180.00)*pi)*(4+(var(9)/60.00)),Sin((var(8)/180.00)*pi)*(4+(var(9)/60.00))
+removetime = -2
+sprpriority = 50+random%60
+scale = (0.05+(var(9)/360.00))/1.00,(0.05+(var(9)/360.00))/1.00
+angle = var(8)
+trans = add
+ownpal = 1
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = time>=110
+v = 9    ;fv = 10
+value = ((time-110)*1.60)+(16+random%48)
+
+[State 0, Glowing Sparkles]
+type = Explod
+trigger1 = time>140
+anim = 10029
+random = 0,0
+pos = Cos((var(8)/180.00)*pi)*var(9),(-160+(160/((time-60)/25.00)*1.00+0.01))+Sin((var(8)/180.00)*pi)*var(9)
+postype = p1
+vel = Cos((var(8)/180.00)*pi)*1,Sin((var(8)/180.00)*pi)*1
+removetime = -2
+sprpriority = 151
+scale = 0.45,-(0.25+(time-110)*0.006)
+angle = -var(8)+180
+trans = add
+ownpal = 1
+
+[State 210, 2]
+type = Projectile
+trigger1 = time>120 && time%4=0
+projanim = 6206
+projremove = 1
+projremovetime = 5
+projscale = 0.001,0.001
+offset = 0, (-160+(160/((time-60)/25.00)*1.00+0.01))
+attr = A, HA
+animtype  = Hard
+damage    = 8,8
+hitflag = MAFD
+id = 3050
+guardflag = U
+pausetime = 0,8
+sparkno = S7000
+sparkxy = -9999,0
+guard.sparkno = -1
+;hitsound   = S7,67
+;guardsound = S3,1
+ground.type = High
+ground.slidetime = 4
+ground.hittime  = 13
+ground.velocity = ifelse(root,pos x-pos x>0,-1,1)*facing*3,-9
+air.velocity = ifelse(root,pos x-pos x>0,-1,1)*facing*3,-9
+givepower = 8
+getpower = 0
+guard.velocity = -10
+guard.slidetime = 20
+fall = 1
+fall.recover = 0
+fall.yvelocity = -8
+;envshake.time = 7
+;envshake.ampl = 4
+ground.cornerpush.veloff = .3
+guard.cornerpush.veloff = .3
+palfx.time = 20
+palfx.add = -(time-120),-(time-120),-(time-120)
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = time>450
+id = 4150
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = time>450
+id = 4151
+
+[State 0, Explod]
+type = Explod
+trigger1 = time>450
+anim = 7100
+pos = 160,120
+postype = back
+facing = 1
+bindtime = -1
+removetime = -2
+scale = 10,10
+sprpriority = 180
+ownpal = 1
+removeongethit = 0
+trans = add
+supermovetime = 99999
+pausemovetime = 99999
+
+[State 0, Explod]
+type = Explod
+trigger1 = time>450
+anim = 10027
+pos = 0,0
+postype = back
+facing = 1
+bindtime = -1
+removetime = -2
+scale = 1,1
+sprpriority = 150
+ownpal = 1
+removeongethit = 0
+trans = add
+supermovetime = 99999
+pausemovetime = 99999
+
+[State 0, Explod]
+type = Explod
+trigger1 = time=450
+anim = 10027
+pos = 0,0
+postype = front
+facing = -1
+bindtime = -1
+removetime = -2
+scale = 1,1
+sprpriority = 150
+ownpal = 1
+removeongethit = 0
+trans = sub
+supermovetime = 99999
+pausemovetime = 99999
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = time>450
+value = ifelse(pos y<0,51,0)
+ctrl = ifelse(pos y<0,0,1)
+
+;---------------------------------------------------------------------------
 ; Rage Fury (Rage Lv3)
 [Statedef 4100]
 movetype= A                      ;Move-type: A-attack, I-idle, H-gethit

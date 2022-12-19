@@ -121,6 +121,7 @@ local current = player.current():root()
 		if (current:time()<420 and current:time()>160) then
 			enemy1:forcecustomstate(current,5609)
 			enemy1:isfrozenset(1)
+			--enemy1:palnoset(1)
 
 			if (current:sysvar(3)<-1000) then
 			enemy1:aliveset(0)
